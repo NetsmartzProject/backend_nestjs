@@ -1,5 +1,6 @@
-import { Controller, Post, Request, Logger, ConflictException, NotFoundException, Get, Param } from "@nestjs/common";
+import { Controller, Post, Request, Logger, ConflictException, NotFoundException, Get, Param, Res, HttpStatus } from "@nestjs/common";
 import { UserService } from "./user.service";
+import { Response } from "express"; // Import Response from express
 
 @Controller('user')
 export class UserController {
@@ -44,22 +45,17 @@ export class UserController {
   }
 
   @Post('login')
-  async login(@Request() req): Promise<any> {
+  async login(@Request() req, @Res() res: Response): Promise<any> {
     const { email, password } = req.body;
 
     try {
       const user = await this.userService.authenticate(email, password);
 
       // You may generate and return a JWT token here for authentication
-
-      return user;
+      return res.status(HttpStatus.OK).json({ user, statusCode: HttpStatus.OK });
     } catch (err) {
       this.logger.error('Login failed:', err);
-      throw err;
+      return res.status(HttpStatus.UNAUTHORIZED).json({ message: 'Login failed', statusCode: HttpStatus.UNAUTHORIZED });
     }
   }
-
-  
-
-
 }
