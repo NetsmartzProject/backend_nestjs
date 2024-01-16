@@ -9,6 +9,7 @@ export class TaskController {
   async createTask(@Param('email') email: string, @Body() taskData: any): Promise<any> {
     try {
       const task = await this.taskService.createTask(email, taskData);
+      console.log(task,"task")
       return task;
     } catch (err) {
       throw new BadRequestException('Failed to create task', err.message);

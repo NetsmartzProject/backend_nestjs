@@ -1,21 +1,4 @@
-// import { Injectable, forwardRef, Inject, Logger } from '@nestjs/common';
-// import { InjectModel } from '@nestjs/mongoose';
-// import { FilterQuery, Model } from 'mongoose';
-// import { User, UserDocument } from './user.model';
-
-// @Injectable()
-// export class UserService {
-//     constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>) {}
-
-//     async findOne(query: FilterQuery<User>): Promise<User | null> {
-//       return this.userModel.findOne(query).exec();
-//     }
   
-//     async create(newUser: User): Promise<User> {
-//       return this.userModel.create(newUser);
-//     }
-  
-// }   
 
 import { Injectable, ConflictException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';

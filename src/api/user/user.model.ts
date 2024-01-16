@@ -1,24 +1,7 @@
-// import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-// import { Document } from 'mongoose';
 
-// @Schema()
-// export class User{
-//     @Prop()
-//     firstname:string;
-//     @Prop()
-//     lastname:string;
-//     @Prop({lowercase:true,unique:true})
-//     email:string
-//     @Prop({select:false})
-//     password:string
-// }
-
-// export type UserDocument = User & Document
-// export const UserSchema = SchemaFactory.createForClass(User);
-
-// user.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Task } from './task/task.model';
 
 @Schema()
 export class User {
@@ -33,6 +16,9 @@ export class User {
 
   @Prop({ select: false })
   password: string;
+
+  @Prop() 
+  task: string[]; 
 }
 
 export interface UserDocument extends User, Document {
